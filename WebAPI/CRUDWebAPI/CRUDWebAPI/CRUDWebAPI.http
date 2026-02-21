@@ -1,0 +1,6 @@
+@CRUDWebAPI_HostAddress = http://localhost:5181
+
+GET {{CRUDWebAPI_HostAddress}}/employee/
+Accept: application/json
+
+###
