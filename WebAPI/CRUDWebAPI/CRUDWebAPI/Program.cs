@@ -21,6 +21,16 @@ namespace CRUDWebAPI
             builder.Services.AddDbContext<EmployeeDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,6 +40,7 @@ namespace CRUDWebAPI
                 app.UseSwaggerUI();
                 app.MapOpenApi();
             }
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 
